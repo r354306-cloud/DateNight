@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Cecelia 💕</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  min-height: 100vh;
+  background: #1a0a1e;
+  font-family: 'DM Sans', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.bg-orbs {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.bg-orbs .orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  animation: float 8s ease-in-out infinite;
+}
+.orb:nth-child(1) { width: 400px; height: 400px; background: rgba(190, 80, 120, 0.25); top: -10%; left: -10%; animation-delay: 0s; }
+.orb:nth-child(2) { width: 350px; height: 350px; background: rgba(140, 60, 160, 0.2); bottom: -10%; right: -10%; animation-delay: -3s; }
+.orb:nth-child(3) { width: 250px; height: 250px; background: rgba(220, 120, 90, 0.15); top: 50%; left: 50%; animation-delay: -5s; }
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -20px) scale(1.05); }
+  66% { transform: translate(-20px, 15px) scale(0.95); }
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 520px;
+  padding: 20px;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(40px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 28px;
+  padding: 44px 36px;
+  text-align: center;
+  animation: cardIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(30px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.hearts-top {
+  font-size: 28px;
+  letter-spacing: 6px;
+  margin-bottom: 8px;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  color: #fff;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
+
+.subtitle {
+  color: rgba(255, 200, 200, 0.7);
+  font-size: 15px;
+  font-style: italic;
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 32px;
+}
+
+.question-label {
+  color: rgba(255, 180, 180, 0.5);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+.question-text {
+  font-family: 'Playfair Display', serif;
+  color: #fff;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.4;
+  margin-bottom: 28px;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.option-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 16px 20px;
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+}
+.option-btn:hover {
+  background: rgba(200, 100, 130, 0.2);
+  border-color: rgba(220, 130, 150, 0.4);
+  transform: translateX(6px);
+  box-shadow: 0 4px 20px rgba(180, 80, 120, 0.15);
+}
+.option-btn:active {
+  transform: translateX(6px) scale(0.98);
+}
+.option-btn .emoji {
+  font-size: 22px;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.06);
+  border-radius: 10px;
+}
+
+.progress-bar {
+  margin-top: 32px;
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+}
+.progress-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+  transition: all 0.4s ease;
+}
+.progress-dot.active {
+  background: rgba(220, 130, 150, 0.7);
+  box-shadow: 0 0 8px rgba(220, 130, 150, 0.4);
+}
+.progress-dot.done {
+  background: rgba(220, 130, 150, 0.35);
+}
+
+/* Results */
+.result-card {
+  animation: cardIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.result-emoji {
+  font-size: 48px;
+  margin-bottom: 12px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.result-name {
+  font-family: 'Playfair Display', serif;
+  color: #fff;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.result-details {
+  color: rgba(255, 200, 200, 0.6);
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.result-reason {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 28px;
+  padding: 0 10px;
+}
+
+.result-time {
+  background: rgba(220, 130, 150, 0.15);
+  border: 1px solid rgba(220, 130, 150, 0.3);
+  border-radius: 14px;
+  padding: 14px 20px;
+  margin-bottom: 16px;
+}
+.result-time .label {
+  color: rgba(255, 180, 180, 0.5);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 4px;
+}
+.result-time .time {
+  color: #fff;
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+}
+
+.cta-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, #c06080, #9050a0);
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  padding: 14px 32px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 8px;
+}
+.cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(180, 80, 120, 0.3);
+}
+
+.restart-btn {
+  background: none;
+  border: none;
+  color: rgba(255,200,200,0.4);
+  font-size: 13px;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  margin-top: 16px;
+  transition: color 0.3s;
+}
+.restart-btn:hover { color: rgba(255,200,200,0.7); }
+
+.hidden { display: none; }
+
+.sparkle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 10;
+  font-size: 16px;
+  animation: sparkleUp 1s ease-out forwards;
+}
+@keyframes sparkleUp {
+  0% { opacity: 1; transform: translateY(0) scale(1); }
+  100% { opacity: 0; transform: translateY(-60px) scale(0.3); }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-orbs">
+  <div class="orb"></div>
+  <div class="orb"></div>
+  <div class="orb"></div>
+</div>
+
+<div class="container">
+  <!-- INTRO -->
+  <div class="card" id="intro">
+    <div class="hearts-top">♥ ♥ ♥</div>
+    <h1>Hey Cecelia 💕</h1>
+    <div class="subtitle">I'm taking you out tomorrow...<br>but you get to help me pick where</div>
+    <button class="cta-btn" onclick="startQuiz()">Let's Go ✨</button>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="card hidden" id="quiz">
+    <div class="question-label" id="qLabel"></div>
+    <div class="question-text" id="qText"></div>
+    <div class="options" id="qOptions"></div>
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <!-- RESULT -->
+  <div class="card result-card hidden" id="result">
+    <div class="result-emoji" id="resEmoji"></div>
+    <div class="result-name" id="resName"></div>
+    <div class="result-details" id="resDetails"></div>
+    <div class="result-reason" id="resReason"></div>
+    <div class="result-time" id="resTimeBox">
+      <div class="label">Let's book for</div>
+      <div class="time" id="resTime"></div>
+    </div>
+    <button class="cta-btn" onclick="window.open(resLink,'_blank')">Book on Resy 💌</button>
+    <br>
+    <button class="restart-btn" onclick="restart()">take it again ↺</button>
+  </div>
+</div>
+
+<script>
+const restaurants = [
+  { name: "The Blue Sushi", cuisine: "Sushi", price: "$$", area: "Columbus", rating: 4.6, reviews: 246, times: ["11:45 AM","12:00 PM","12:15 PM","12:30 PM"], tags: ["sushi","light","trendy"], emoji: "🍣", vibe: "trendy" },
+  { name: "I Like It Like That", cuisine: "Wood Fired Fare", price: "$", area: "Columbus", rating: 4.9, reviews: 303, times: ["5:00 PM","5:15 PM","5:30 PM","5:45 PM"], tags: ["woodfire","cozy","unique"], emoji: "🔥", vibe: "cozy" },
+  { name: "High Bank Distillery Co", cuisine: "American", price: "$$", area: "Grandview Heights", rating: 4.8, reviews: 3600, times: ["11:00 AM","11:15 AM","11:30 AM","11:45 AM"], tags: ["drinks","american","fun"], emoji: "🥃", vibe: "fun" },
+  { name: "The 698", cuisine: "Asian", price: "$", area: "Columbus", rating: 4.7, reviews: 653, times: ["11:45 AM","12:00 PM"], tags: ["asian","trendy","affordable"], emoji: "🥢", vibe: "trendy" },
+  { name: "Natalie's Grandview", cuisine: "Pizza", price: "$$", area: "Columbus", rating: 4.9, reviews: 2100, times: ["5:00 PM","5:15 PM","5:30 PM"], tags: ["pizza","livemusic","fun"], emoji: "🍕", vibe: "fun" },
+  { name: "Metsi's", cuisine: "Italian", price: "$", area: "Short North", rating: 4.6, reviews: 748, times: ["4:00 PM","4:15 PM","4:30 PM"], tags: ["italian","romantic","cozy"], emoji: "🍝", vibe: "romantic" },
+  { name: "The 1126 Restaurant", cuisine: "Japanese", price: "$", area: "Columbus", rating: 4.7, reviews: 652, times: ["3:00 PM","3:15 PM"], tags: ["japanese","sushi","intimate"], emoji: "🏮", vibe: "romantic" },
+  { name: "J. Alexander's Columbus", cuisine: "American", price: "$$", area: "Crosswoods", rating: 4.7, reviews: 6300, times: ["11:00 AM","11:15 AM","11:30 AM"], tags: ["american","classic","upscale"], emoji: "🥩", vibe: "classic" },
+  { name: "Abigail Street", cuisine: "Mediterranean", price: "$", area: "Over The Rhine", rating: 4.9, reviews: 3400, times: ["5:00 PM","7:45 PM","8:00 PM"], tags: ["mediterranean","romantic","unique"], emoji: "🫒", vibe: "romantic" },
+  { name: "HART & CRU", cuisine: "Wine Bar", price: "$$", area: "Cincinnati", rating: 5.0, reviews: 754, times: ["2:00 PM","2:15 PM"], tags: ["wine","romantic","upscale"], emoji: "🍷", vibe: "romantic" },
+  { name: "Mid City Restaurant", cuisine: "International", price: "$", area: "Columbus", rating: 4.9, reviews: 1700, times: ["5:00 PM","5:15 PM"], tags: ["international","trendy","unique"], emoji: "🌎", vibe: "trendy" },
+  { name: "Verona Vineyards", cuisine: "American", price: "$", area: "Verona", rating: 4.8, reviews: 92, times: ["5:00 PM","5:15 PM","5:30 PM","5:45 PM"], tags: ["wine","romantic","quiet"], emoji: "🍇", vibe: "romantic" }
+];
+
+const questions = [
+  {
+    label: "Question 1 of 5",
+    text: "First things first... how are we feeling about tomorrow, Cecelia? 💭",
+    options: [
+      { emoji: "🦋", text: "Excited & adventurous", tags: { mood: "adventurous" } },
+      { emoji: "🕯️", text: "Cozy & romantic", tags: { mood: "romantic" } },
+      { emoji: "🎉", text: "Fun & spontaneous", tags: { mood: "fun" } },
+      { emoji: "✨", text: "Treat-yourself energy", tags: { mood: "upscale" } }
+    ]
+  },
+  {
+    label: "Question 2 of 5",
+    text: "What kind of food sounds amazing right now?",
+    options: [
+      { emoji: "🍣", text: "Sushi or Japanese", tags: { food: "sushi" } },
+      { emoji: "🍝", text: "Italian or Mediterranean", tags: { food: "italian" } },
+      { emoji: "🥩", text: "American comfort classics", tags: { food: "american" } },
+      { emoji: "🌶️", text: "Surprise me — something unique", tags: { food: "unique" } }
+    ]
+  },
+  {
+    label: "Question 3 of 5",
+    text: "Pick the vibe that makes your heart happy:",
+    options: [
+      { emoji: "🕯️", text: "Dim lights & whispered convos", tags: { vibe: "romantic" } },
+      { emoji: "🎶", text: "Good music & good energy", tags: { vibe: "fun" } },
+      { emoji: "📸", text: "Cute & aesthetic — I want pics", tags: { vibe: "trendy" } },
+      { emoji: "🥂", text: "Classy & elegant", tags: { vibe: "classic" } }
+    ]
+  },
+  {
+    label: "Question 4 of 5",
+    text: "What time works best for our date? 🕐",
+    options: [
+      { emoji: "☀️", text: "Lunch date (11 AM – 1 PM)", tags: { time: "lunch" } },
+      { emoji: "🌤️", text: "Afternoon hang (2 – 4 PM)", tags: { time: "afternoon" } },
+      { emoji: "🌅", text: "Early dinner (5 – 6 PM)", tags: { time: "early_dinner" } },
+      { emoji: "🌙", text: "Later evening (7 PM+)", tags: { time: "late_dinner" } }
+    ]
+  },
+  {
+    label: "Last question 💕",
+    text: "What matters most to you on a date?",
+    options: [
+      { emoji: "💬", text: "Great conversation & intimacy", tags: { priority: "intimate" } },
+      { emoji: "😋", text: "Incredible food, obviously", tags: { priority: "food" } },
+      { emoji: "🥰", text: "Just being together", tags: { priority: "together" } },
+      { emoji: "🌟", text: "Making a memory", tags: { priority: "experience" } }
+    ]
+  }
+];
+
+let currentQ = 0;
+let answers = {};
+let resLink = "";
+
+function sparkle(x, y) {
+  const s = document.createElement("div");
+  s.className = "sparkle";
+  s.textContent = ["✨","💖","♥","💕","🌟"][Math.floor(Math.random()*5)];
+  s.style.left = x + "px";
+  s.style.top = y + "px";
+  document.body.appendChild(s);
+  setTimeout(() => s.remove(), 1000);
+}
+
+function startQuiz() {
+  document.getElementById("intro").classList.add("hidden");
+  document.getElementById("quiz").classList.remove("hidden");
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = questions[currentQ];
+  const quiz = document.getElementById("quiz");
+  quiz.style.animation = "none";
+  quiz.offsetHeight;
+  quiz.style.animation = "cardIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) both";
+
+  document.getElementById("qLabel").textContent = q.label;
+  document.getElementById("qText").textContent = q.text;
+
+  const opts = document.getElementById("qOptions");
+  opts.innerHTML = "";
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement("button");
+    btn.className = "option-btn";
+    btn.style.animationDelay = (i * 0.08) + "s";
+    btn.innerHTML = `<span class="emoji">${opt.emoji}</span> ${opt.text}`;
+    btn.onclick = function(e) {
+      sparkle(e.clientX, e.clientY);
+      sparkle(e.clientX + 20, e.clientY - 10);
+      Object.assign(answers, opt.tags);
+      currentQ++;
+      if (currentQ < questions.length) {
+        setTimeout(renderQuestion, 250);
+      } else {
+        setTimeout(showResult, 400);
+      }
+    };
+    opts.appendChild(btn);
+  });
+
+  // Progress
+  const bar = document.getElementById("progressBar");
+  bar.innerHTML = "";
+  for (let i = 0; i < questions.length; i++) {
+    const dot = document.createElement("div");
+    dot.className = "progress-dot" + (i < currentQ ? " done" : "") + (i === currentQ ? " active" : "");
+    bar.appendChild(dot);
+  }
+}
+
+function scoreRestaurant(r) {
+  let score = 0;
+
+  // Food match
+  if (answers.food === "sushi" && (r.tags.includes("sushi") || r.tags.includes("japanese"))) score += 30;
+  if (answers.food === "italian" && (r.tags.includes("italian") || r.tags.includes("mediterranean"))) score += 30;
+  if (answers.food === "american" && r.tags.includes("american")) score += 30;
+  if (answers.food === "unique" && r.tags.includes("unique")) score += 30;
+
+  // Vibe match
+  if (answers.vibe === "romantic" && r.vibe === "romantic") score += 25;
+  if (answers.vibe === "fun" && r.vibe === "fun") score += 25;
+  if (answers.vibe === "trendy" && r.vibe === "trendy") score += 25;
+  if (answers.vibe === "classic" && r.vibe === "classic") score += 25;
+
+  // Mood match
+  if (answers.mood === "romantic" && r.vibe === "romantic") score += 15;
+  if (answers.mood === "fun" && (r.vibe === "fun" || r.vibe === "trendy")) score += 15;
+  if (answers.mood === "adventurous" && (r.tags.includes("unique") || r.vibe === "trendy")) score += 15;
+  if (answers.mood === "upscale" && (r.price === "$$" || r.tags.includes("upscale"))) score += 15;
+
+  // Time match
+  const hasLunch = r.times.some(t => { const h = parseTime(t); return h >= 11 && h < 13; });
+  const hasAfternoon = r.times.some(t => { const h = parseTime(t); return h >= 13 && h < 17; });
+  const hasEarlyDinner = r.times.some(t => { const h = parseTime(t); return h >= 17 && h < 19; });
+  const hasLateDinner = r.times.some(t => { const h = parseTime(t); return h >= 19; });
+
+  if (answers.time === "lunch" && hasLunch) score += 20;
+  if (answers.time === "afternoon" && hasAfternoon) score += 20;
+  if (answers.time === "early_dinner" && hasEarlyDinner) score += 20;
+  if (answers.time === "late_dinner" && hasLateDinner) score += 20;
+
+  // Priority bonus
+  if (answers.priority === "intimate" && r.vibe === "romantic") score += 10;
+  if (answers.priority === "food" && r.rating >= 4.8) score += 10;
+  if (answers.priority === "experience" && r.tags.includes("unique")) score += 10;
+  if (answers.priority === "together") score += 5;
+
+  // Rating/popularity bonus
+  score += (r.rating - 4.5) * 10;
+  if (r.reviews > 1000) score += 3;
+
+  return score;
+}
+
+function parseTime(t) {
+  const m = t.match(/(\d+):(\d+)\s*(AM|PM)/);
+  if (!m) return 0;
+  let h = parseInt(m[1]);
+  if (m[3] === "PM" && h !== 12) h += 12;
+  if (m[3] === "AM" && h === 12) h = 0;
+  return h + parseInt(m[2]) / 60;
+}
+
+function getBestTime(r) {
+  let target;
+  if (answers.time === "lunch") target = 12;
+  else if (answers.time === "afternoon") target = 15;
+  else if (answers.time === "early_dinner") target = 17.5;
+  else target = 19.5;
+
+  let best = r.times[0];
+  let bestDiff = 999;
+  r.times.forEach(t => {
+    const diff = Math.abs(parseTime(t) - target);
+    if (diff < bestDiff) { bestDiff = diff; best = t; }
+  });
+  return best;
+}
+
+function getReasonText(r) {
+  const reasons = [];
+  if (r.rating >= 4.9) reasons.push(`rated ${r.rating}★ — people love this place`);
+  else if (r.rating >= 4.7) reasons.push(`rated ${r.rating}★ with great reviews`);
+  if (r.vibe === "romantic") reasons.push("the perfect romantic vibe");
+  if (r.vibe === "fun") reasons.push("exactly the fun energy we need");
+  if (r.vibe === "trendy") reasons.push("trendy & aesthetic — your kind of spot");
+  if (r.tags.includes("unique")) reasons.push("something a little different & special");
+  return `I picked this for us because it has ${reasons.slice(0, 2).join(" and ")}. Get ready Cecelia — tomorrow's going to be perfect. 💕`;
+}
+
+function showResult() {
+  const scored = restaurants.map(r => ({ ...r, score: scoreRestaurant(r) }));
+  scored.sort((a, b) => b.score - a.score);
+  const pick = scored[0];
+
+  document.getElementById("quiz").classList.add("hidden");
+  document.getElementById("result").classList.remove("hidden");
+
+  document.getElementById("resEmoji").textContent = pick.emoji;
+  document.getElementById("resName").textContent = pick.name;
+  document.getElementById("resDetails").textContent = `${pick.cuisine} · ${pick.price} · ${pick.area}`;
+  document.getElementById("resReason").textContent = getReasonText(pick);
+  document.getElementById("resTime").textContent = `Tomorrow at ${getBestTime(pick)}`;
+
+  resLink = `https://resy.com/cities/columbus-oh/venues?query=${encodeURIComponent(pick.name)}`;
+
+  // Celebration sparkles
+  for (let i = 0; i < 12; i++) {
+    setTimeout(() => {
+      sparkle(Math.random() * window.innerWidth, Math.random() * window.innerHeight * 0.6);
+    }, i * 120);
+  }
+}
+
+function restart() {
+  currentQ = 0;
+  answers = {};
+  document.getElementById("result").classList.add("hidden");
+  document.getElementById("intro").classList.remove("hidden");
+  const intro = document.getElementById("intro");
+  intro.style.animation = "none";
+  intro.offsetHeight;
+  intro.style.animation = "cardIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) both";
+}
+</script>
+</body>
+</html>
